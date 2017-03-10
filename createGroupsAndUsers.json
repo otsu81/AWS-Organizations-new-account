@@ -1,0 +1,52 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description" : "Template for creating IAM admin group and role for Admin roleswitch",
+
+  "Resources": {
+
+    "admingroup": {
+      "Type": "AWS::IAM::Group",
+      "Properties": {
+        "GroupName": "administrators",
+        "Path": "/",
+        "ManagedPolicyArns": [
+          "arn:aws:iam::aws:policy/AdministratorAccess"
+        ]
+      }
+    },
+
+    "adminRole": {
+      "Type" : "AWS::IAM::Role",
+      "Properties" : {
+        "RoleName" : "admin-role",
+        "Path" : "/",
+        "ManagedPolicyArns": [
+          "arn:aws:iam::aws:policy/AdministratorAccess"
+        ],
+        "AssumeRolePolicyDocument" : {
+          "Version" : "2012-10-17",
+          "Statement": [
+            {
+              "Sid": "",
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": "arn:aws:iam::123456789012:root"
+              },
+              "Action": "sts:AssumeRole",
+              "Condition": {
+                "Bool": {
+                  "aws:MultiFactorAuthPresent": "true"
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+
+  },
+
+  "Outputs" : {
+
+  }
+}
