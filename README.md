@@ -26,6 +26,7 @@ Cloudformation script is executed in the `eu-west-1` (Ireland) region, modify as
 The bash script organizations.sh calls for an Account Name. For our internal use that's usually a project name. It will also ask for a "friendly system name" which we internally use for shorthand reference of the account in the registered e-mail and admin role.
 
 There will be two roles in the newly created account:
+
 1. ConsolidatedBillingAuditRole with readonly IAM permissions
 2. `admin-[shortname]` with administrator privileges with a trust to another administrator AWS account. Requires MFA token.
 
